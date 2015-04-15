@@ -17,7 +17,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 22
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
@@ -28,20 +28,17 @@ dependencies {
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'commons-io:commons-io:2.4'
-
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:1.9.5"
 }
 
 task clearJar(type: Delete) {
-    delete 'build/libs/reservoir-'+project.VERSION_NAME+'.jar'
+    delete 'build/libs/reservoir-' + project.VERSION_NAME + '.jar'
 }
 
 task makeJar(type: Copy) {
     from('build/intermediates/bundles/release/')
     into('build/libs/')
     include('classes.jar')
-    rename ('classes.jar', 'reservoir-'+project.VERSION_NAME+'.jar')
+    rename('classes.jar', 'reservoir-' + project.VERSION_NAME + '.jar')
 }
 
 makeJar.dependsOn(clearJar, build)
