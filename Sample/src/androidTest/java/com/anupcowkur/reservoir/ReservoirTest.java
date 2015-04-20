@@ -45,4 +45,38 @@ public class ReservoirTest {
 
     }
 
+    @Test
+    @MediumTest
+    public void testShouldPutAndGetObjectOnBackgroundThread() throws Exception {
+
+        TestClass testPutObject = new TestClass();
+
+        testPutObject.setTestString(TEST_STRING);
+
+        Reservoir.putAsync(KEY, testPutObject, new ReservoirPutCallback() {
+            @Override
+            public void onSuccess() {
+                Reservoir.getAsync(KEY, TestClass.class, new ReservoirGetCallback<TestClass>() {
+                    @Override
+                    public void onSuccess(TestClass testResultObject) {
+                        assertEquals(TEST_STRING, testResultObject.getTestString());
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+
+    }
+
+
+
 }
