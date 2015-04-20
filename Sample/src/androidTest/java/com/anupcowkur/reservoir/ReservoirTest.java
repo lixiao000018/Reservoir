@@ -77,6 +77,14 @@ public class ReservoirTest {
 
     }
 
+    @Test(expected = NullPointerException.class)
+    @MediumTest
+    public void testSyncShouldThrowNullPointerExceptionWhenObjectDoesNotExist() throws
+            Exception {
+
+        Reservoir.get("non_existent_key", TestClass.class);
+
+    }
 
 
 }
