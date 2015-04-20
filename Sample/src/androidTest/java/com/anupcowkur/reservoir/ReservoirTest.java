@@ -31,7 +31,7 @@ public class ReservoirTest {
 
     @Test
     @MediumTest
-    public void testShouldPutAndGetObjectOnMainThread() throws Exception {
+    public void testSyncShouldPutAndGetObject() throws Exception {
 
         TestClass testPutObject = new TestClass();
 
@@ -47,7 +47,7 @@ public class ReservoirTest {
 
     @Test
     @MediumTest
-    public void testShouldPutAndGetObjectOnBackgroundThread() throws Exception {
+    public void testAsyncShouldPutAndGetObject() throws Exception {
 
         TestClass testPutObject = new TestClass();
 
