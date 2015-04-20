@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThat;
 
 /**
  * The main reservoir class.
@@ -86,5 +88,22 @@ public class ReservoirTest {
 
     }
 
+    @Test
+    @MediumTest
+    public void testAsyncShouldCallOnFailureWhenObjectDoesNotExist() throws
+            Exception {
+
+        Reservoir.getAsync("non_existent_key", TestClass.class, new ReservoirGetCallback<TestClass>() {
+            @Override
+            public void onSuccess(TestClass object) {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                assertThat(e, instanceOf(NullPointerException.class));
+            }
+        });
+    }
 
 }
